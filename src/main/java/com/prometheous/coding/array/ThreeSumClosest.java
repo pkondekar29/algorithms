@@ -1,6 +1,5 @@
 package com.prometheous.coding.array;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class ThreeSumClosest {
@@ -24,13 +23,16 @@ public class ThreeSumClosest {
     }
 
     public static int closest(int[] a, int target) {
-        Arrays.sort(a);
-        int minSum = Integer.MAX_VALUE;
-        int currSum;
-        for(int i = 0; i < a.length - 2; i++) {
-            currSum = a[i] + a[i + 1] + a[i + 2];
-            if(Math.abs(target - currSum) < Math.abs(target - minSum)) {
-                minSum = currSum;
+        int minSum = Integer.MAX_VALUE, n = a.length;
+        for(int i = 0; i < n; i++) {
+            for(int j = i + 1; j < n; j++) {
+                for(int k = j + 1; k < n; k++) {
+                    int currSum = a[i] + a[j] + a[k];
+                    System.out.println(currSum);
+                    if(Math.abs(target - currSum) < Math.abs(target - minSum)) {
+                        minSum = currSum;
+                    }
+                }
             }
         }
         return minSum;

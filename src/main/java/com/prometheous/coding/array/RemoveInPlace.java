@@ -1,4 +1,5 @@
 package com.prometheous.coding.array;
+
 import java.util.Scanner;
 
 public class RemoveInPlace {
