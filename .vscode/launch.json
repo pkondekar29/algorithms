@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - ThreeSumClosest",
+            "request": "launch",
+            "mainClass": "com.prometheous.coding.array.ThreeSumClosest",
+            "projectName": "snippets"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - RemoveInPlace",
+            "request": "launch",
+            "mainClass": "com.prometheous.coding.array.RemoveInPlace",
+            "projectName": "snippets"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"
