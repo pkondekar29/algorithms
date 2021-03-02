@@ -23,13 +23,14 @@ public class ThreeSumClosest {
     }
 
     public static int closest(int[] a, int target) {
-        int minSum = Integer.MAX_VALUE, n = a.length;
+        int minDiff = Integer.MAX_VALUE, n = a.length, minSum = 0;
         for(int i = 0; i < n; i++) {
             for(int j = i + 1; j < n; j++) {
                 for(int k = j + 1; k < n; k++) {
                     int currSum = a[i] + a[j] + a[k];
                     System.out.println(currSum);
-                    if(Math.abs(target - currSum) < Math.abs(target - minSum)) {
+                    if(Math.abs(target - currSum) < Math.abs(minDiff)) {
+                        minDiff = Math.abs(target - currSum);
                         minSum = currSum;
                     }
                 }
