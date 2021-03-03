@@ -10,8 +10,8 @@ import java.util.stream.IntStream;
 public class AllCombinations {
 
     public static void main(String[] args) {
-        int n = 1, k = 1;
-        AllCombinations.find(n, k)
+        int n = 4, k = 2;
+        AllCombinations.findA(n, k)
             .stream().map(intList -> intList.stream().map(Object::toString).collect(Collectors.joining(",")))
             .forEach(System.out::println);
     }
@@ -30,6 +30,36 @@ public class AllCombinations {
             int noOfOnes = 0;
             int[] tempPos = new int[n];
             Arrays.fill(tempPos, 0);
+            for(int j = n - 1; j >= 0; j--) {
+                if(str.charAt(j) == '1') {
+                    noOfOnes++;
+                    tempPos[n - j - 1] = 1;
+                }
+            }
+            if(noOfOnes == k) {
+                List<Integer> pairs = new ArrayList<>();
+                for(int j = 0; j < str.length(); j++) {
+                    if(tempPos[j] == 1) pairs.add(j + 1);
+                }
+                res.add(pairs);
+            }
+        }
+        return res;
+    }
+
+    public static List<List<Integer>> findA(int n, int k) {
+        List<List<Integer>> res = new ArrayList<>();
+        double p = Math.pow(2, n);
+        for(int i = 0; i < p; i++) {
+            String str = Integer.toBinaryString(i);
+            if(str.length() != n) {
+                int tempn = str.length();
+                for(int j = 0; j < n - tempn; j++) {
+                    str = "0" + str;
+                }
+            }
+            int noOfOnes = 0;
+            int[] tempPos = new int[n];
             for(int j = n - 1; j >= 0; j--) {
                 if(str.charAt(j) == '1') {
                     noOfOnes++;
