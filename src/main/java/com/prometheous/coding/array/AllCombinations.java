@@ -2,7 +2,6 @@ package com.prometheous.coding.array;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,9 +10,42 @@ public class AllCombinations {
 
     public static void main(String[] args) {
         int n = 4, k = 2;
-        AllCombinations.findA(n, k)
+        AllCombinations.combinations(n, k)
             .stream().map(intList -> intList.stream().map(Object::toString).collect(Collectors.joining(",")))
             .forEach(System.out::println);
+    }
+
+    public static List<List<Integer>> combinations(int n, int k) {
+        List<List<Integer>> res = new ArrayList<>();
+        int[] currArr = new int[k];
+        findAllCombinations(n, k, 0, 0, currArr, res);
+        return res;
+    }
+
+    private static void findAllCombinations(int n, int k, int counter, int currIndex, int[] arr, List<List<Integer>> res) {
+        if(counter >= k) {
+            List<Integer> arrList = new ArrayList<>();
+            for(int l : arr) {
+                arrList.add(l);
+            }
+            res.add(arrList);
+            return;
+        }
+        for (int p = currIndex; p < n; p++) {
+            boolean considered = isPresent(arr, p + 1);     // If number is already considered
+            if (!considered) {
+                arr[counter] = p + 1;
+                findAllCombinations(n, k, ++counter, currIndex + 1, arr, res);
+            }
+        }
+    }
+
+    private static boolean isPresent(int[] arr, int p) {
+        boolean present = false;
+        for(int j = 0; j < arr.length && !present; j++) {
+            if(arr[j] == p) present = true;
+        }
+        return present;
     }
 
     public static List<List<Integer>> find(int n, int k) {
