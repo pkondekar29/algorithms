@@ -29,12 +29,7 @@ public class MergeKSortedList {
     }
 
     public static ListNode mergeEff(ListNode[] list) {
-        PriorityQueue<ListNode> q = new PriorityQueue<ListNode>(new Comparator<ListNode>() {
-            @Override
-            public int compare(ListNode o1, ListNode o2) {
-                return o1.val - o2.val;
-            }
-        });
+        PriorityQueue<ListNode> q = new PriorityQueue<ListNode>(Comparator.comparingInt(o -> o.val));
         ListNode prev = null, head = null;
         for(ListNode node : list) {
             q.add(node);
