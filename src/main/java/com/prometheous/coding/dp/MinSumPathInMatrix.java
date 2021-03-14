@@ -2,14 +2,14 @@ package com.prometheous.coding.dp;
 
 import java.util.Arrays;
 
-public class MinSumPath {
+public class MinSumPathInMatrix {
     static Integer minSum;
     public static void main(String[] args) {
         int[][] grid = {{1,2,3}, {4,5,6}};
 //        MinSumPath.findMinSum(grid);
 //        System.out.println(minSum);
 //
-        System.out.println(MinSumPath.findMinEff(grid));
+        System.out.println(MinSumPathInMatrix.findMinEff(grid));
     }
 
     public static int findMinEff(int[][] grid) {
