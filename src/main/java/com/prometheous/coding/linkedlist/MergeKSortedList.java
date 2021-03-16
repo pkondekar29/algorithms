@@ -1,24 +1,12 @@
 package com.prometheous.coding.linkedlist;
 
+import com.prometheous.coding.model.ListNode;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
 public class MergeKSortedList {
-
-    static class ListNode {
-        public int val;
-        public ListNode next;
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
 
     public static void main(String[] args) {
         ListNode[] list = new ListNode[5];
