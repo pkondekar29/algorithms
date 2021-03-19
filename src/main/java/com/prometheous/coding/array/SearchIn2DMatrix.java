@@ -9,21 +9,18 @@ public class SearchIn2DMatrix {
     }
 
     public static boolean search(int[][] a, int t) {
-        int i = 0, j = 0, m = a.length;
-        while(i < m && t >= a[i + 1][0]) {
-            i++;
-        }
-        if(i == m) {
-            i = m - 1;
+        boolean found = false;
+
+        int low = 0, high = a.length, mid = (low + high) / 2;
+        while(low < high) {
+            if(a[mid][0] > t) {
+                break;
+            }
+
+
         }
 
-        int n = a[i].length;
-        while(j < n - 1 && t <= a[i][j + 1]) {
-            j++;
-        }
-        if(j == n) j = n - 1;
-
-        return t == a[i][j];
+        return found;
     }
 
 }
