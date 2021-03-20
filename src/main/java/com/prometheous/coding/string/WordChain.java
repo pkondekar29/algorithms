@@ -16,40 +16,36 @@ import java.util.Arrays;
  */
 public class WordChain {
     public static void main(String args[]) throws Exception {
+        String[] words = new String[] {"am", "sas", "serq"};
+        System.out.println(isPossible(words));
     }
 
-    private static boolean isPossible(String[] words) {
+    public static boolean isPossible(String[] words) {
         boolean[] visited = new boolean[words.length];
         for (int i = 0; i < words.length; i++) {
             Arrays.fill(visited, false);
             visited[i] = true;
-            if (DFS(words, i, 0, visited)) return true;
+            if (DFS(words, i, -1, 0, visited)) return true;
         }
         return false;
     }
 
-    private static boolean DFS(String[] words, int curr, int prev, boolean[] visited) {
+    private static boolean DFS(String[] words, int curr, int prev, int count, boolean[] visited) {
         if (curr >= words.length) return false;      // If curr over flows, return
-        if (words[prev].charAt(words[prev].length() - 1) != words[curr].charAt(0))
+        if (prev != -1 && words[prev].charAt(words[prev].length() - 1) != words[curr].charAt(0))
             return false;     /// Return if the characters mismatch
 
         visited[curr] = true;
-        if (allVisited(visited)) return true;
+        if (count == words.length - 1) return true;
 
         boolean possible = false;
         for (int i = 0; i < words.length; i++) {
-            possible = possible || DFS(words, i, curr, visited);
+            if(!visited[i])
+                possible = possible || DFS(words, i, curr, count + 1, visited);
             if (possible) return true;
         }
         visited[curr] = false;
-        return possible;
-    }
-
-    private static boolean allVisited(boolean[] visited) {
-        for (int i = 0; i < visited.length; i++) {
-            if (!visited[i]) return false;
-        }
-        return true;
+        return false;
     }
 
 }
