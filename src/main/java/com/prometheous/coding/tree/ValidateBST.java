@@ -17,7 +17,10 @@ public class ValidateBST {
     private static boolean isValidSubTree(TreeNode root, Integer leftMax, Integer rightMax) {
         if(root == null) return true;
 
-        boolean isValid = isValidSubTree(root.left, leftMax, rightMax);
+        Integer lMax = Integer.valueOf(root.val), rmin = Integer.valueOf(root.val);
+        boolean l = isValidSubTree(root.left, lMax, rmin);
+        boolean r = isValidSubTree(root.left, lMax, rmin);
+
         return true;
     }
 

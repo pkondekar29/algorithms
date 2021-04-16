@@ -19,7 +19,7 @@ public class AllPermutations {
         if(a.length == 0) return res;
 
         boolean[] visited = new boolean[a.length];
-        all(a, new ArrayList<Integer>(), visited, res);
+        all(a, new ArrayList<>(), visited, res);
         return res;
     }
 
