@@ -1,5 +1,10 @@
 package com.prometheous.coding.model;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Builder
+@Data
 public class TreeNode {
     public int val;
     public TreeNode left;
