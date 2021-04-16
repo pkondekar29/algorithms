@@ -18,7 +18,7 @@ public class CleanCode {
      *
      * DRI (Don't repeat yourself)
      *
-     * SOLID.
+     * SOLID => Single responsibility, Open closed, Liskov substitution, Interface segregation, Dependency injection
      */
 
 }
