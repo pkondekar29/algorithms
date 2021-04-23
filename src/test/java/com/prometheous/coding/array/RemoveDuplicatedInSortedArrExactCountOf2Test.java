@@ -1,7 +1,5 @@
 package com.prometheous.coding.array;
 
-import com.prometheous.coding.dp.JumpGameIII;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -27,7 +25,7 @@ public class RemoveDuplicatedInSortedArrExactCountOf2Test {
     @ParameterizedTest
     @MethodSource(value = "all")
     public void test(int[] a, int c, int[] res) {
-        assertEquals(RemoveDuplicatedInSortedArrExactCountOf2.solve(a), c);
+        assertEquals(RemoveDuplicatedInSortedArrExactCountOf2.removeDuplicatedValuesInSortedArr(a), c);
         assertArrayEquals(res, Arrays.copyOfRange(a, 0, c));
     }
 

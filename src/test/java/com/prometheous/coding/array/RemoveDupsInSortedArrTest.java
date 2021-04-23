@@ -26,7 +26,7 @@ public class RemoveDupsInSortedArrTest {
     @ParameterizedTest
     @MethodSource(value = "all")
     public void test(int[] a, int c, int[] res) {
-        assertEquals(RemoveDupsInSortedArry.solve(a), c);
+        assertEquals(RemoveDupsInSortedArry.removeDuplicatesInSortedArr(a), c);
         assertArrayEquals(res, Arrays.copyOfRange(a, 0, c));
     }
 
