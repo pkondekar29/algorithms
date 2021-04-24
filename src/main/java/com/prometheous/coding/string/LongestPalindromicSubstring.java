@@ -1,9 +1,12 @@
 package com.prometheous.coding.string;
 
+import com.prometheous.coding.utils.PrinterUtils;
+
 public class LongestPalindromicSubstring {
 
     public static void main(String[] args) {
         System.out.println(findPalindromicSubString("abaabcasge"));
+        System.out.println(findLongestPalindromicSubstring("babac"));
     }
 
     private static String findPalindromicSubString(String str) {
@@ -34,5 +37,40 @@ public class LongestPalindromicSubstring {
         else return str.substring(d - (max/2) + 1, d + (max/2) + 1);
     }
 
+    private static String findLongestPalindromicSubstring(String str) {
+        int max = 1, n = str.length(), pos = 1;
+        for(int i = 0; i < n; i++) {
 
+            int p = i - 1, q = i + 1;
+            boolean taken = false;
+            while(p >= 0 && q < n && str.charAt(p) == str.charAt(q)) {
+                p--;
+                q++;
+                taken = true;
+            }
+
+            if(taken && i - p + q - i > max) {
+                max = i - p + q - i;
+                pos = i;
+            }
+
+            taken = false;
+            p = i; q = i + 1;
+            while(p >= 0 && q < n && str.charAt(p) == str.charAt(q)) {
+                p--;
+                q++;
+                taken = true;
+            }
+
+            if(taken && i - p + q - i > max) {
+                max = i - p + q - i;
+                pos = i;
+            }
+        }
+        if(max == 1) {
+            return str.substring(0, 1);
+        }
+        if(max % 2 == 1) return str.substring(pos - (max/2), pos + (max/2) + 1);
+        else return str.substring(pos - (max/2) + 1, pos + (max/2) + 1);
+    }
 }
