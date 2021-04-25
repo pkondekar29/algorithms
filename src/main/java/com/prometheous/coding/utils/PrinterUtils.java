@@ -45,4 +45,8 @@ public class PrinterUtils {
     private static void printLine() {
         System.out.println();
     }
+
+    public static void print(String str) {
+        System.out.println(str);
+    }
 }
