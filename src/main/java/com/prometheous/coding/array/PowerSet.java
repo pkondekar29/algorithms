@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Subset {
+public class PowerSet {
 
     public static void main(String[] args) {
         int[] nums = new int[] {1,2,3};
@@ -32,5 +32,4 @@ public class Subset {
         }
         return res;
     }
-
 }

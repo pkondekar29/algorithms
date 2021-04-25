@@ -1,6 +1,7 @@
 package com.prometheous.coding.utils;
 
 import com.prometheous.coding.model.ListNode;
+import com.prometheous.coding.model.TreeNode;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,5 +49,13 @@ public class PrinterUtils {
 
     public static void print(String str) {
         System.out.println(str);
+    }
+
+    public static void print(TreeNode connect) {
+
+    }
+
+    public static <T> void printList(List<T> list) {
+        System.out.println(list.stream().map(Object::toString).collect(Collectors.joining(", ")));
     }
 }
