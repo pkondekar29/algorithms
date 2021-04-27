@@ -1,6 +1,5 @@
 package com.prometheous.coding.stack;
 
-import java.util.Scanner;
 import java.util.Stack;
 
 public class LongestValidParantheses {
@@ -8,12 +7,45 @@ public class LongestValidParantheses {
     private static Stack<Character> st = new Stack<>();
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        String str = "(())(()()(())))(";
+        System.out.println(LongestValidParantheses.findLongestValidParanthesStackEff(str));
+    }
 
-        String str = sc.next();
-        System.out.println(LongestValidParantheses.findLongestValidParanthes(str));
+    public static int longestValidParenthesesDP(String str) {
+        int max = 0;
+        int[] dp = new int[str.length()];
+        for(int i = 1; i < dp.length; i++) {
+            if(str.charAt(i) == ')' && i - dp[i - 1] - 1 >= 0 &&
+                    str.charAt(i - dp[i - 1] - 1) == '(') {
 
-        sc.close();
+                dp[i] = dp[i - 1] + 2;
+                dp[i] += i - dp[i - 1] - 2 > 0 ? dp[i - dp[i - 1] - 2] : 0;
+
+                max = Math.max(max, dp[i]);
+            }
+        }
+        return max;
+    }
+
+    public static int findLongestValidParanthesStackEff(String s) {
+        Stack<Character> stack = new Stack<>();
+        int maxLength = 0, currMax = 0;
+        int n = s.length();
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) == '(')
+                stack.push('(');
+            else {
+                if(!stack.isEmpty()) {
+                    currMax += 2;
+                    maxLength = Math.max(maxLength, currMax);
+                    stack.pop();
+                } else {
+                    stack.clear();
+                    currMax = 0;
+                }
+            }
+        }
+        return maxLength;
     }
 
     public static int findLongestValidParanthesEff(String s) {

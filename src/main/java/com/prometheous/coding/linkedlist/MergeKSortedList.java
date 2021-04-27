@@ -1,6 +1,7 @@
 package com.prometheous.coding.linkedlist;
 
 import com.prometheous.coding.model.ListNode;
+import com.prometheous.coding.utils.PrinterUtils;
 
 import java.util.Comparator;
 import java.util.List;
@@ -10,6 +11,7 @@ public class MergeKSortedList {
 
     public static void main(String[] args) {
         ListNode[] list = new ListNode[5];
+
         ListNode head = merge(list);
         while(head != null) {
             System.out.print(head.val + " ");
@@ -17,7 +19,8 @@ public class MergeKSortedList {
     }
 
     public static ListNode mergeEff(ListNode[] list) {
-        PriorityQueue<ListNode> q = new PriorityQueue<ListNode>(Comparator.comparingInt(o -> o.val));
+        if(list.length == 0) return null;
+        PriorityQueue<ListNode> q = new PriorityQueue<>(Comparator.comparingInt(ListNode::getVal));
         ListNode prev = null, head = null;
         for(ListNode node : list) {
             q.add(node);

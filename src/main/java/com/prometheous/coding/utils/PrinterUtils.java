@@ -58,4 +58,8 @@ public class PrinterUtils {
     public static <T> void printList(List<T> list) {
         System.out.println(list.stream().map(Object::toString).collect(Collectors.joining(", ")));
     }
+
+    public static void print(boolean b) {
+        System.out.print(b);
+    }
 }
