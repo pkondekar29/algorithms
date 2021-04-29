@@ -21,7 +21,7 @@ public class AddNextPointerToTreeNode {
                         new TreeNode(-3,
                                 null,
                                 new TreeNode(11)));
-        PrinterUtils.print(connect(root));
+        PrinterUtils.print(connectEff(root));
     }
 
     public static TreeNode connect(TreeNode root) {
@@ -50,6 +50,31 @@ public class AddNextPointerToTreeNode {
             levelQ = nextLevelQ;
         }
         return root;
+    }
+
+    public static void connectEff(TreeNode root) {
+        if (root == null) return;
+        TreeNode dummyHead = new TreeNode(0);
+        TreeNode currP = root;
+        TreeNode p = dummyHead;
+        while (currP != null) {
+            if (currP.left != null) {
+                p.next = currP.left;
+                p = p.next;
+            }
+            if (currP.right != null) {
+                p.next = currP.right;
+                p = p.next;
+            }
+
+            if (currP.next != null) {
+                currP = currP.next;
+            } else {
+                currP = dummyHead.next;
+                dummyHead.next = null;
+                p = dummyHead;
+            }
+        }
     }
 
 }
