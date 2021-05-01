@@ -35,6 +35,8 @@ public class InfixToPostfix {
                 operatorStack.push(c);
             }
         }
+        while(!operatorStack.isEmpty())
+            sb.append(operatorStack.pop());
         return sb.toString();
     }
 
