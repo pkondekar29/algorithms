@@ -52,8 +52,8 @@ public class AddNextPointerToTreeNode {
         return root;
     }
 
-    public static void connectEff(TreeNode root) {
-        if (root == null) return;
+    public static TreeNode connectEff(TreeNode root) {
+        if (root == null) return null;
         TreeNode dummyHead = new TreeNode(0);
         TreeNode currP = root;
         TreeNode p = dummyHead;
@@ -75,6 +75,7 @@ public class AddNextPointerToTreeNode {
                 p = dummyHead;
             }
         }
+        return root;
     }
 
 }
