@@ -15,7 +15,7 @@ public class AllPrimes {
         boolean[] sieve = new boolean[n + 1];
         Arrays.fill(sieve, true);
         for(int i = 2; i * i <= n; i++) {
-            if(sieve[i] == true) {
+            if(sieve[i]) {
                 for(int k = i * i; k <= n; k += i) {
                     sieve[k] = false;
                 }
@@ -25,7 +25,7 @@ public class AllPrimes {
         List<Integer> allPrimes = new ArrayList<>();
         allPrimes.add(1);
         for(int i = 2; i <= n; i++) {
-            if(sieve[i] == true)
+            if(sieve[i])
                 allPrimes.add(i);
         }
         return allPrimes;

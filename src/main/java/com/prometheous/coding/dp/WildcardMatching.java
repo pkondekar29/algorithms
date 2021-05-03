@@ -18,10 +18,28 @@ public class WildcardMatching {
         boolean[][] dp = new boolean[m+1][n+1];
         dp[0][0] = true;    // Empty string matches with empty pattern
 
+        for(int j = 1; j <= n; j++) {
+            if(p.charAt(j - 1) == '*')
+                dp[0][j] = true;
+            else
+                break;
+        }
+
+        for(int i = 1; i <= m; i++) {
+            for(int j = 1; j <= n; j++) {
+
+                if(s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '?')
+                    dp[i][j] = dp[i - 1][j - 1];
+                else if(p.charAt(j - 1) == '*')
+                    dp[i][j] = dp[i - 1][j] // If string till previous char is matched, current will also match
+                            || dp[i][j - 1];
+            }
+        }
+
         return dp[m][n];
     }
 
-    // T = O(m + n), S = O(m + n)
+    // T = O(m+n), S = O(m+n)*(mn)
     private static boolean dfs(String s, String p, int i, int j, Boolean[][] memo) {
         if(i == s.length()) {
             if(j == p.length()) return true;
