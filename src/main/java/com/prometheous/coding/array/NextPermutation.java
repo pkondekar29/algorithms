@@ -38,9 +38,7 @@ public class NextPermutation {
             nums[maxPos] = nums[i];
             nums[i] = temp;
         }
-
         Arrays.sort(nums, i + 1, n);
         return nums;
     }
-
 }
