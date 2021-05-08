@@ -1,8 +1,10 @@
 package com.prometheous.coding.utils;
 
 import com.prometheous.coding.model.ListNode;
+import com.prometheous.coding.model.Node;
 import com.prometheous.coding.model.TreeNode;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +45,7 @@ public class PrinterUtils {
         printLine();
     }
 
-    private static void printLine() {
+    public static void printLine() {
         System.out.println();
     }
 
@@ -61,5 +63,24 @@ public class PrinterUtils {
 
     public static void print(boolean b) {
         System.out.print(b);
+    }
+
+    public static void print(Node node) {
+        if(node == null) return;
+        HashSet<Node> visited = new HashSet<>();
+        dfs(node, visited);
+    }
+
+    private static void dfs(Node node, HashSet<Node> visited) {
+        if(node == null) return;
+        visited.add(node);
+        System.out.println(node.val + ":[" +
+                node.neighbors.stream().map(n -> n.val).map(Object::toString).collect(Collectors.joining(","))
+            + "]");
+        for(Node n : node.neighbors){
+            if(!visited.contains(n)) {
+                dfs(n, visited);
+            }
+        }
     }
 }
