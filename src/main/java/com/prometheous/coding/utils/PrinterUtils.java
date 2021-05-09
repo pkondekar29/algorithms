@@ -4,6 +4,7 @@ import com.prometheous.coding.model.ListNode;
 import com.prometheous.coding.model.Node;
 import com.prometheous.coding.model.TreeNode;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -81,6 +82,22 @@ public class PrinterUtils {
             if(!visited.contains(n)) {
                 dfs(n, visited);
             }
+        }
+    }
+
+    public static void print(boolean[][] a) {
+        for(int i = 0; i < a.length; i++) {
+            for(int j = 0; j < a[0].length; j++) {
+                System.out.print((a[i][j] ? 1 : 0) + " ");
+            }
+            System.out.println();
+        }
+        printLine();
+    }
+
+    public static <T> void print(ArrayList<T>[] a) {
+        for(int i = 0; i < a.length; i++) {
+            System.out.println(i + ": [" + a[i].stream().map(Object::toString).collect(Collectors.joining(", ")) + "]");
         }
     }
 }
