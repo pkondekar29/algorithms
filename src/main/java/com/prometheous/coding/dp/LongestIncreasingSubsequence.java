@@ -1,5 +1,6 @@
 package com.prometheous.coding.dp;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class LongestIncreasingSubsequence {
@@ -37,9 +38,7 @@ public class LongestIncreasingSubsequence {
     public static int findLongestIncreasingSubsequenceLengthDP(int[] nums) {
         if(nums.length <= 1) return nums.length;
         int[] dp = new int[nums.length];
-        for(int i = 0; i < nums.length; i++) {
-            dp[i] = 1;
-        }
+        Arrays.fill(dp, 1);
         for(int i = 1; i < nums.length; i++) {
             for(int j = 0; j < i; j++) {
                 if(nums[j] < nums[i]) {
