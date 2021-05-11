@@ -6,10 +6,12 @@ import com.prometheous.coding.utils.PrinterUtils;
 public class PartitionList {
 
     public static void main(String[] args) {
-        ListNode node = new ListNode(3, new ListNode(9, new ListNode(0, new ListNode(-10, new ListNode(-9)))));
+        ListNode node = new ListNode(9, new ListNode(3, new ListNode(0, new ListNode(-10, new ListNode(-9)))));
         PrinterUtils.print(new PartitionList().partition(node, 0));
+        PrinterUtils.print(new PartitionList().partitionInPlace(node, -10));
     }
 
+    // This changes the value of the numbers inside which is not preferred.
     public ListNode partition(ListNode head, int pivot) {
         ListNode i = new ListNode(), j = head;
         i.next = head;
@@ -24,6 +26,26 @@ public class PartitionList {
             j = j.next;
         }
         return head;
+    }
+
+    public ListNode partitionInPlace(ListNode head, int pivot) {
+        if(head == null) return null;
+
+        ListNode lessThanPivot = new ListNode(0), lItr = lessThanPivot;
+        ListNode greaterThanPivot = new ListNode(0), gItr = greaterThanPivot;
+
+        while(head != null) {
+            if(head.val < pivot) {
+                lItr.next = head;
+                lItr = lItr.next;
+            } else {
+                gItr.next = head;
+                gItr = gItr.next;
+            }
+            head = head.next;
+        }
+        lItr.next = greaterThanPivot.next;
+        return lessThanPivot.next;
     }
 
 }
