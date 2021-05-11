@@ -54,10 +54,6 @@ public class PrinterUtils {
         System.out.println(str);
     }
 
-    public static void print(TreeNode connect) {
-
-    }
-
     public static <T> void printList(List<T> list) {
         System.out.println(list.stream().map(Object::toString).collect(Collectors.joining(", ")));
     }
@@ -106,5 +102,9 @@ public class PrinterUtils {
             System.out.print(a[i] + " ");
         }
         printLine();
+    }
+
+    public static void print(TreeNode root) {
+        BTreePrinter.printNode(root);
     }
 }

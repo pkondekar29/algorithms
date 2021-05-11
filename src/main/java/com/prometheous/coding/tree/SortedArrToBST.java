@@ -1,12 +1,14 @@
 package com.prometheous.coding.tree;
 
 import com.prometheous.coding.model.TreeNode;
+import com.prometheous.coding.utils.PrinterUtils;
 
 public class SortedArrToBST {
 
     public static void main(String[] args) {
         int[] arr = new int[]{-10, -3, 0, 5, 9};
         TreeNode root = convertToBST(arr);
+        PrinterUtils.print(root);
     }
 
     public static TreeNode convertToBST(int[] arr) {
