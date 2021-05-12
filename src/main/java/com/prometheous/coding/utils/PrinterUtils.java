@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 public class PrinterUtils {
 
+    private PrinterUtils() {}
+
     public static void print(int[][] a) {
         for(int i = 0; i < a.length; i++) {
             for(int j = 0; j < a[0].length; j++) {
