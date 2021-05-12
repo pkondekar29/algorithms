@@ -45,6 +45,7 @@ public class PartitionList {
             head = head.next;
         }
         lItr.next = greaterThanPivot.next;
+        gItr.next = null;
         return lessThanPivot.next;
     }
 
