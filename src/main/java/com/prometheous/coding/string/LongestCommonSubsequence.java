@@ -34,11 +34,12 @@ public class LongestCommonSubsequence {
     private static String findLCS(String s1, String s2, int i, int j) {
         if(i == 0 || j == 0)
             return "";
+
         if(s1.charAt(i - 1) == s2.charAt(j - 1))
             return findLCS(s1, s2, i - 1, j - 1) + s1.charAt(i - 1);
 
-        if(dp[i - 1][j] > dp[i][j - 1]) return findLCS(s1, s2, i - 1, j);
-        else return findLCS(s1, s2, i, j - 1);
+        return (dp[i - 1][j] > dp[i][j - 1]) ? findLCS(s1, s2, i - 1, j)
+                : findLCS(s1, s2, i, j - 1);
     }
 
 }
