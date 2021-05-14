@@ -1,19 +1,12 @@
 package com.prometheous.coding.array;
 
-import java.util.Arrays;
-import java.util.LinkedList;
+import com.prometheous.coding.utils.PrinterUtils;
 
 public class NumToSquareSpiralMatrix {
 
     public static void main(String[] args) {
         int n = 5;
-        int[][] a = toSpiralMat(n);
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                System.out.print(a[i][j] + " ");
-            }
-            System.out.println();
-        }
+        PrinterUtils.print(toSpiralMat(n));
     }
 
     private static int[][] toSpiralMat(int n) {

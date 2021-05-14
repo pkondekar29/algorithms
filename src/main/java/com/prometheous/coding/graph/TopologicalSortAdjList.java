@@ -43,12 +43,12 @@ public class TopologicalSortAdjList {
     public List<Integer> findTopSortOrder(List<List<Integer>> adjList) {
         // Incoming edge count
         int[] incomingEdges = new int[adjList.size()];
-        int edgeCount = 0;
+        int incomingEdgeCount = 0;
         // Find the incoming edges
         for(int i = 0; i < adjList.size(); i++) {
             for(Integer to : adjList.get(i)){
                 incomingEdges[to]++;
-                edgeCount++;
+                incomingEdgeCount++;
             }
         }
         Queue<Integer> queue = new LinkedList<>();
@@ -63,13 +63,13 @@ public class TopologicalSortAdjList {
             int nextVertex = queue.poll();
             ordering.addLast(nextVertex);
             for(Integer to : adjList.get(nextVertex)) {
-                edgeCount--;
+                incomingEdgeCount--;
                 incomingEdges[to]--;
                 if(incomingEdges[to] == 0)  // If there are no incoming edges for the vertex, it can be traversed
                     queue.offer(to);
             }
         }
-        if(edgeCount != 0)
+        if(incomingEdgeCount != 0)
             throw new Error("Cycle exists in the graph");
 
         return ordering;

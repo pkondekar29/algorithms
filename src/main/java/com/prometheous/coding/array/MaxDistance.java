@@ -5,7 +5,7 @@ import com.prometheous.coding.utils.PrinterUtils;
 public class MaxDistance {
 
     public static void main(String[] args) {
-        PrinterUtils.print(maxIndexDistance(new int[] {1, 10}));
+        PrinterUtils.print(maxIndexDistance(new int[] {1, 2, -1, 10}));
     }
 
     public static int maxIndexDistance(int[] nums) {

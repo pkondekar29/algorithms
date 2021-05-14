@@ -15,19 +15,18 @@ public class NumberOfStations {
     public static boolean minStations(List<Integer> arrive, List<Integer> depart, int K) {
         Collections.sort(arrive);
         Collections.sort(depart);
-        int min = 1, currMin = 1;
+        int minNumberOfStations = 1, numberOfStations = 1;
         int i = 1, j = 0, n = arrive.size();
         while(i < n && j < n) {
             if(arrive.get(i) <= depart.get(j)) {
-                currMin++;
+                numberOfStations++;
                 i++;
             } else if(arrive.get(i) > depart.get(j)){
                 j++;
-                currMin--;
+                numberOfStations--;
             }
-            if(currMin > min)
-                min = currMin;
+            minNumberOfStations = Math.min(minNumberOfStations, numberOfStations);
         }
-        return K <= min;
+        return K <= minNumberOfStations;
     }
 }

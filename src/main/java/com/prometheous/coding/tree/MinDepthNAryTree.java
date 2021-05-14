@@ -22,12 +22,12 @@ public class MinDepthNAryTree {
             int n = queue.size();
             while(n-- > 0) {
                 Node node = queue.poll();
-                if(node.children == null || node.children.size() == 0) {
+                if(node.neighbors == null || node.neighbors.size() == 0) {
                     return level;
                 }
 
-                for(int i = 0; i < node.children.size(); i++) {
-                    queue.offer(node.children.get(i));
+                for(int i = 0; i < node.neighbors.size(); i++) {
+                    queue.offer(node.neighbors.get(i));
                 }
             }
             level++;

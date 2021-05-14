@@ -10,7 +10,7 @@ public class CombinationSum {
     public static void main(String[] args) {
 //        int[] c = {2, 3, 6, 7};
         int[] c = {1, 2};
-        combinationSum(c, 3)
+        combinationSumEff(c, 3)
             .stream()
             .forEach(l -> {
                 l.forEach(i -> System.out.print(i + " "));
@@ -18,15 +18,15 @@ public class CombinationSum {
             });
     }
 
-    List<List<Integer>> res = new ArrayList<>();
-    public List<List<Integer>> combinationSumEff(int[] candidates, int target) {
+    static List<List<Integer>> res = new ArrayList<>();
+    public static List<List<Integer>> combinationSumEff(int[] candidates, int target) {
         //backtracking
         Arrays.sort(candidates);
         dfs(new ArrayList<>(), candidates, 0, target);
         return res;
     }
 
-    private void dfs(List<Integer> curr, int[] cs, int idx, int target) {
+    private static void dfs(List<Integer> curr, int[] cs, int idx, int target) {
         if (idx > cs.length) return;
         if (idx == cs.length || target <= 0 || cs[idx] > target) {
             if (target == 0) res.add(curr);

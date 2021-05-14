@@ -15,14 +15,16 @@ public class MinimumInRotatedSortedArray {
 
             if(mid > 0 && midValue < nums[mid - 1]) {
                 return mid;
-            } else if(nums[mid] >= nums[low] && nums[mid] > nums[high]) {
-                // Mid value is greater that left => which means that left side is sorted.
-                // And mid > high, i.e. the right is not sorted.
-                // Which is were we want to go. Since the minimum element would be in the unsorted part.
-                low = mid + 1;
             } else {
-                // Else we want to move to left
-                high = mid - 1;
+                if(midValue >= nums[low] && midValue > nums[high]) {
+                    // Mid value is greater that left => which means that left side is sorted.
+                    // And mid > high, i.e. the right is not sorted.
+                    // Which is were we want to go. Since the minimum element would be in the unsorted part.
+                    low = mid + 1;
+                } else {
+                    // Else we want to move to left
+                    high = mid - 1;
+                }
             }
         }
         return low;

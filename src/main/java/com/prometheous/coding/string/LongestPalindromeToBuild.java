@@ -20,15 +20,15 @@ public class LongestPalindromeToBuild {
         for(int i = 0; i < s.length(); i++) {
             map.merge(s.charAt(i), 1, Integer::sum);
         }
-        Boolean allEven = true;
-        Integer sum = 0;
+        boolean allEven = true;
+        int sum = 0;
         for (Map.Entry<Character, Integer> characterIntegerEntry : map.entrySet()) {
             Integer count = characterIntegerEntry.getValue();
             if (count % 2 == 1) allEven = false;
             sum += 2 * (count / 2);
         }
-        if(allEven) return sum.intValue();
-        else return sum.intValue() + 1;
+        if(allEven) return sum;
+        else return sum + 1;
     }
 
 }

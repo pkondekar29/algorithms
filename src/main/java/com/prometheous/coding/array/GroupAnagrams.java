@@ -19,7 +19,6 @@ public class GroupAnagrams {
     }
 
     public static List<List<String>> groupAnagramsEff(String[] strs) {
-        List<List<String>> res = new ArrayList<>();
         HashMap<String, List<String>> hash = new HashMap<>();
         for(String str : strs) {
             char[] chars = str.toCharArray();
@@ -28,7 +27,7 @@ public class GroupAnagrams {
             hash.putIfAbsent(sortedStr, new ArrayList<>());
             hash.get(sortedStr).add(str);
         }
-        res.addAll(hash.values());
+        List<List<String>> res = new ArrayList<>(hash.values());
         return res;
     }
 

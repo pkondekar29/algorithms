@@ -10,18 +10,16 @@ public class ValidateBST {
     }
 
     public static boolean isValid(TreeNode root) {
-        Integer leftMax = Integer.MIN_VALUE, rightMax = Integer.MIN_VALUE;
-        return isValidSubTree(root, leftMax, rightMax);
+        return isValid(root, null, null);
     }
 
-    private static boolean isValidSubTree(TreeNode root, Integer leftMax, Integer rightMax) {
+    private static boolean isValid(TreeNode root, TreeNode min, TreeNode max) {
         if(root == null) return true;
-
-        Integer lMax = Integer.valueOf(root.val), rmin = Integer.valueOf(root.val);
-        boolean l = isValidSubTree(root.left, lMax, rmin);
-        boolean r = isValidSubTree(root.left, lMax, rmin);
-
-        return true;
+        if((min != null && root.val <= min.val) || (max != null && root.val >= max.val)) return false;
+        return // While going to the left, current node should be max
+                isValid(root.left, min, root)
+                // While going to the right, current node should be min
+                && isValid(root.right, root, max);
     }
 
 }
