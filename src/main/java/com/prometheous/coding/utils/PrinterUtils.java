@@ -109,4 +109,8 @@ public class PrinterUtils {
     public static void print(TreeNode root) {
         BTreePrinter.printNode(root);
     }
+
+    public static void print(double d) {
+        System.out.println(d);
+    }
 }
