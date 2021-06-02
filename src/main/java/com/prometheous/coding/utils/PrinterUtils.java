@@ -7,6 +7,7 @@ import com.prometheous.coding.model.TreeNode;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Queue;
 import java.util.stream.Collectors;
 
 public class PrinterUtils {
@@ -93,7 +94,7 @@ public class PrinterUtils {
         printLine();
     }
 
-    public static <T> void print(ArrayList<T>[] a) {
+    public static <T> void print(List<T>[] a) {
         for(int i = 0; i < a.length; i++) {
             System.out.println(i + ": [" + a[i].stream().map(Object::toString).collect(Collectors.joining(", ")) + "]");
         }
@@ -112,5 +113,11 @@ public class PrinterUtils {
 
     public static void print(double d) {
         System.out.println(d);
+    }
+
+    public static void print(Queue<Integer> queue) {
+        while(!queue.isEmpty()) {
+            System.out.println(queue.poll() + " ");
+        }
     }
 }
