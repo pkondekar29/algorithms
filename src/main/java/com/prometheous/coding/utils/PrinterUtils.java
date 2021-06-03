@@ -4,9 +4,13 @@ import com.prometheous.coding.model.ListNode;
 import com.prometheous.coding.model.Node;
 import com.prometheous.coding.model.TreeNode;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
@@ -120,4 +124,18 @@ public class PrinterUtils {
             System.out.println(queue.poll() + " ");
         }
     }
+
+    public static void print(boolean[] matches) {
+        for(boolean b : matches)
+            System.out.print((b ? 1 : 0) + " ");
+        PrinterUtils.printLine();
+    }
+
+    public static <T> void print(T[] a) {
+        for(T t : a) {
+            System.out.print(t + "");
+        }
+        PrinterUtils.printLine();
+    }
+
 }
