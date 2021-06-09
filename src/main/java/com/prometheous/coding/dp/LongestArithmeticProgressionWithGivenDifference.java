@@ -13,6 +13,7 @@ public class LongestArithmeticProgressionWithGivenDifference {
     }
 
     public int longestArithmeticProgression(int[] nums, int diff) {
+        // At each number, what is the previous max progression which is present
         Map<Integer, Integer> dp = new HashMap<>();
         int res = 1;
         for (int n : nums) {

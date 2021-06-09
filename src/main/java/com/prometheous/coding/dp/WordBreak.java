@@ -22,7 +22,7 @@ public class WordBreak {
         for(int i = 0; i <= length; i++) {
             if(matches[i]) {
                 for (String word : wordDict) {
-                    if(i + 1 <= length && str.indexOf(word, i) == i){
+                    if(i + 1 <= length && str.startsWith(word)){
                         matches[i + word.length()] = true;
                     }
                 }
@@ -43,8 +43,7 @@ public class WordBreak {
 
         boolean matches = false;
         for(String word : wordDict) {
-            int matchIndex = str.indexOf(word, at);
-            if(matchIndex == at) {
+            if(str.startsWith(word)) {
                 matches = matches || dfs(str, at + word.length(), wordDict, memo);
             }
         }

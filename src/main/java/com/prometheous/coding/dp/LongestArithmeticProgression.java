@@ -17,6 +17,14 @@ public class LongestArithmeticProgression {
 
     public int findLongestArithmeticProgressionSubsequenceDp(int[] A) {
         int longest = 0;
+        // The DP is for each diff and max length for this AP
+        /*
+            0th -> diff of 2: length of 2, diff of 3: length of 1
+            1st ->
+            .
+            .
+            .
+         */
         Map<Integer, Integer>[] dp = new HashMap[A.length];
         for(int i = 0; i < A.length; i++) {
             dp[i] = new HashMap<>();
