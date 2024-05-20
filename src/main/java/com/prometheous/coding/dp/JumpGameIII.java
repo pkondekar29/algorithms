@@ -6,38 +6,44 @@ import java.util.Queue;
 
 public class JumpGameIII {
 
-    public static void main(String[] args) {
-        int a[] = {0,1};
-        int start = 1;
+   public static void main(String[] args) {
 
-        System.out.println(isPossible(a, start));
-    }
+      int a[] = { 0, 1 };
+      int start = 1;
 
-    // Gave TLE
-    public static boolean isPossible(int[] a, int start) {
-        Queue<Integer> q = new ArrayDeque<>();
-        boolean[] visited = new boolean[a.length];
-        Arrays.fill(visited, false);
-        q.add(start);
-        visited[start] = true;
-        while(!q.isEmpty()) {
-            int idx = q.poll();
+      System.out.println(isPossible(a, start));
+   }
 
-            if(a[idx] == 0) return true;
-            if(idx + a[idx] < visited.length && !visited[idx + a[idx]])
-                q.add(idx + a[idx]);
-            if(idx - a[idx] >= 0 && !visited[idx - a[idx]])
-                q.add(idx - a[idx]);
-        }
-        return false;
-    }
+   // Gave TLE
+   public static boolean isPossible(int[] a, int start) {
 
-    public static boolean canReachEff(int[] arr, int start) {
-        if(start<0 || start>=arr.length || arr[start]<0) return false;
-        if(arr[start] == 0) return true;        // Return true if found
+      Queue<Integer> q = new ArrayDeque<>();
+      boolean[] visited = new boolean[a.length];
+      Arrays.fill(visited, false);
+      q.add(start);
+      visited[start] = true;
+      while (!q.isEmpty()) {
+         int idx = q.poll();
 
-        arr[start] = -arr[start];       // Mark visited
-        return canReachEff(arr, start + arr[start]) || canReachEff(arr, start - arr[start]);
-    }
+         if (a[idx] == 0)
+            return true;
+         if (idx + a[idx] < visited.length && !visited[idx + a[idx]])
+            q.add(idx + a[idx]);
+         if (idx - a[idx] >= 0 && !visited[idx - a[idx]])
+            q.add(idx - a[idx]);
+      }
+      return false;
+   }
+
+   public static boolean canReachEff(int[] arr, int start) {
+
+      if (start < 0 || start >= arr.length || arr[start] < 0)
+         return false;
+      if (arr[start] == 0)
+         return true;        // Return true if found
+
+      arr[start] = -arr[start];       // Mark visited
+      return canReachEff(arr, start + arr[start]) || canReachEff(arr, start - arr[start]);
+   }
 
 }

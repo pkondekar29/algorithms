@@ -4,41 +4,48 @@ import com.prometheous.coding.model.TreeNode;
 
 public class FindPathSum {
 
-    public static void main(String[] args) {
-        TreeNode node = new TreeNode(1, new TreeNode(2), null);
-        System.out.println(hasPathSum(node, 1));
-    }
+   public static void main(String[] args) {
 
-    public static boolean hasPathSum(TreeNode root, int targetSum) {
-        if(root == null) return false;
+      TreeNode node = new TreeNode(1, new TreeNode(2), null);
+      System.out.println(hasPathSum(node, 1));
+   }
 
-        if(root.left == null && root.right == null) return targetSum == root.val;
+   public static boolean hasPathSum(TreeNode root, int targetSum) {
 
-        return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
-    }
+      if (root == null)
+         return false;
 
-    public static boolean hasPathSum1(TreeNode root, int targetSum) {
-        if(root == null) return false;
+      if (root.left == null && root.right == null)
+         return targetSum == root.val;
 
-        return findPathSum(root, targetSum);
-    }
+      return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
+   }
 
-    private static boolean findPathSum(TreeNode root, int targetSum) {
-        if(root.left == null && root.right == null) {
-            if(targetSum == root.val)
-                return true;
-            else
-                return false;
-        }
+   public static boolean hasPathSum1(TreeNode root, int targetSum) {
 
-        boolean l = false, r = false;
-        if(root.left != null)
-            l = findPathSum(root.left, targetSum - root.val);
+      if (root == null)
+         return false;
 
-        if(root.right != null)
-            r = findPathSum(root.right, targetSum - root.val);
+      return findPathSum(root, targetSum);
+   }
 
-        return l || r;
-    }
+   private static boolean findPathSum(TreeNode root, int targetSum) {
+
+      if (root.left == null && root.right == null) {
+         if (targetSum == root.val)
+            return true;
+         else
+            return false;
+      }
+
+      boolean l = false, r = false;
+      if (root.left != null)
+         l = findPathSum(root.left, targetSum - root.val);
+
+      if (root.right != null)
+         r = findPathSum(root.right, targetSum - root.val);
+
+      return l || r;
+   }
 
 }

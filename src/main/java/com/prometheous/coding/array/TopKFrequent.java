@@ -10,22 +10,26 @@ import java.util.PriorityQueue;
 
 public class TopKFrequent {
 
-    public static void main(String[] args) {
-        int[] nums = new int[]{4,1,-1,2,-1,2,3};
-        PrinterUtils.printList(topKFrequent(nums, 2));
-    }
+   public static void main(String[] args) {
 
-    public static List<Integer> topKFrequent(int[] nums, int k) {
-        Map<Integer, Integer> countMap = new HashMap<>();
-        for(int num : nums) countMap.put(num, countMap.getOrDefault(num, 0) + 1);
+      int[] nums = new int[] { 4, 1, -1, 2, -1, 2, 3 };
+      PrinterUtils.printList(topKFrequent(nums, 2));
+   }
 
-        PriorityQueue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<>((e1, e2) -> - Integer.compare(e1.getValue(), e2.getValue()));
-        minHeap.addAll(countMap.entrySet());
+   public static List<Integer> topKFrequent(int[] nums, int k) {
 
-        List<Integer> res = new ArrayList<>();
-        while(res.size() < k) {
-            res.add(minHeap.poll().getKey());
-        }
-        return res;
-    }
+      Map<Integer, Integer> countMap = new HashMap<>();
+      for (int num : nums)
+         countMap.put(num, countMap.getOrDefault(num, 0) + 1);
+
+      PriorityQueue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<>(
+            (e1, e2) -> -Integer.compare(e1.getValue(), e2.getValue()));
+      minHeap.addAll(countMap.entrySet());
+
+      List<Integer> res = new ArrayList<>();
+      while (res.size() < k) {
+         res.add(minHeap.poll().getKey());
+      }
+      return res;
+   }
 }

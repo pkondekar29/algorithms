@@ -3,56 +3,64 @@ package com.prometheous.coding.dp;
 import java.util.Arrays;
 
 public class MinSumPathInMatrix {
-    static Integer minSum;
-    public static void main(String[] args) {
-        int[][] grid = {{1,2,3}, {4,5,6}};
-//        MinSumPath.findMinSum(grid);
-//        System.out.println(minSum);
-//
-        System.out.println(MinSumPathInMatrix.findMinEff(grid));
-    }
+   static Integer minSum;
 
-    public static int findMinEff(int[][] grid) {
-        int m = grid.length, n = grid[0].length;
-        int[][] dp = new int[m][n];
-        dp[0][0] = grid[0][0];
-        for(int i = 1; i < m; i++) {
-            dp[i][0] = dp[i - 1][0] + grid[i][0];
-        }
-        for(int i = 1; i < n; i++) {
-            dp[0][i] = dp[0][i - 1] + grid[0][i];
-        }
-        for(int i = 1; i < m; i++) {
-            for(int j = 1; j < n; j++) {
-                dp[i][j] = Math.min(dp[i - 1][j] + grid[i][j], dp[i][j - 1] + grid[i][j]);
-            }
-        }
-        return dp[m - 1][n - 1];
-    }
+   public static void main(String[] args) {
 
-    public static void findMinSum(int[][] grid) {
-        int i = 0, j = 0;
-        minSum = Integer.MAX_VALUE;
-        int currSum = 0;
-        boolean[][] visited = new boolean[grid.length][grid[0].length];
-        for(int k = 0; k < visited.length; k++) {
-            Arrays.fill(visited[k], false);
-        }
-        DFS(grid, i, j, currSum, visited);
-    }
+      int[][] grid = { { 1, 2, 3 }, { 4, 5, 6 } };
+      //        MinSumPath.findMinSum(grid);
+      //        System.out.println(minSum);
+      //
+      System.out.println(MinSumPathInMatrix.findMinEff(grid));
+   }
 
-    private static void DFS(int[][] grid, int i, int j, int currSum, boolean[][] visited) {
-        if(i < 0 || j < 0 || i >= grid.length || j >= grid[0].length) return;
-        if(i == grid.length - 1 && j == grid[0].length - 1)
-            if(currSum + grid[i][j] < minSum) minSum = currSum + grid[i][j];
-        if(visited[i][j]) return;
+   public static int findMinEff(int[][] grid) {
 
-        visited[i][j] = true;
+      int m = grid.length, n = grid[0].length;
+      int[][] dp = new int[m][n];
+      dp[0][0] = grid[0][0];
+      for (int i = 1; i < m; i++) {
+         dp[i][0] = dp[i - 1][0] + grid[i][0];
+      }
+      for (int i = 1; i < n; i++) {
+         dp[0][i] = dp[0][i - 1] + grid[0][i];
+      }
+      for (int i = 1; i < m; i++) {
+         for (int j = 1; j < n; j++) {
+            dp[i][j] = Math.min(dp[i - 1][j] + grid[i][j], dp[i][j - 1] + grid[i][j]);
+         }
+      }
+      return dp[m - 1][n - 1];
+   }
 
-        DFS(grid, i + 1, j, currSum + grid[i][j], visited);
-        DFS(grid, i, j + 1, currSum + grid[i][j], visited);
+   public static void findMinSum(int[][] grid) {
 
-        visited[i][j] = false;
-    }
+      int i = 0, j = 0;
+      minSum = Integer.MAX_VALUE;
+      int currSum = 0;
+      boolean[][] visited = new boolean[grid.length][grid[0].length];
+      for (int k = 0; k < visited.length; k++) {
+         Arrays.fill(visited[k], false);
+      }
+      DFS(grid, i, j, currSum, visited);
+   }
+
+   private static void DFS(int[][] grid, int i, int j, int currSum, boolean[][] visited) {
+
+      if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length)
+         return;
+      if (i == grid.length - 1 && j == grid[0].length - 1)
+         if (currSum + grid[i][j] < minSum)
+            minSum = currSum + grid[i][j];
+      if (visited[i][j])
+         return;
+
+      visited[i][j] = true;
+
+      DFS(grid, i + 1, j, currSum + grid[i][j], visited);
+      DFS(grid, i, j + 1, currSum + grid[i][j], visited);
+
+      visited[i][j] = false;
+   }
 
 }

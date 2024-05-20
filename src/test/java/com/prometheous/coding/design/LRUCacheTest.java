@@ -8,21 +8,17 @@ import java.util.stream.Stream;
 
 public class LRUCacheTest {
 
-    public static Stream<Arguments> all() {
-        return Stream.of(
-                Arguments.of('p', 1, 1, -1),
-                Arguments.of('p', 2, 2, -1),
-                Arguments.of('g', 1, null, 1),
-                Arguments.of('p', 3, 3, -1),
-                Arguments.of('g', 2, null, 2),
-                Arguments.of('p', 4, 1, -1),
-                Arguments.of('p', 1, 1, -1)
-        );
-    }
+   public static Stream<Arguments> all() {
 
-    @ParameterizedTest
-    @MethodSource(value = "all")
-    public void testCache(Character type, int k, Integer v, Integer expected) {
-        LRUCache cache = new LRUCache(2);
-    }
+      return Stream.of(Arguments.of('p', 1, 1, -1), Arguments.of('p', 2, 2, -1), Arguments.of('g', 1, null, 1),
+            Arguments.of('p', 3, 3, -1), Arguments.of('g', 2, null, 2), Arguments.of('p', 4, 1, -1),
+            Arguments.of('p', 1, 1, -1));
+   }
+
+   @ParameterizedTest
+   @MethodSource(value = "all")
+   public void testCache(Character type, int k, Integer v, Integer expected) {
+
+      LRUCache cache = new LRUCache(2);
+   }
 }

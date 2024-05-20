@@ -10,15 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StrStrTest {
 
-    @ParameterizedTest
-    @CsvSource({
-            "Hello, ll, 2",
-            "Wassup, February, -1",
-            "Modelpondel, elpo, 3",
-            " \"\", \"\", 0"
-    })
-    public void test(String s1, String s2, int index) {
-        assertEquals(index, StrStr.strstr(s1, s2));
-    }
+   @ParameterizedTest
+   @CsvSource({ "Hello, ll, 2", "Wassup, February, -1", "Modelpondel, elpo, 3", " \"\", \"\", 0" })
+   public void test(String s1, String s2, int index) {
+
+      assertEquals(index, StrStr.strstr(s1, s2));
+   }
 
 }

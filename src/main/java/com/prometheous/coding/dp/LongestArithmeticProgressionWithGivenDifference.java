@@ -7,20 +7,21 @@ import java.util.Map;
 
 public class LongestArithmeticProgressionWithGivenDifference {
 
-    public static void main(String[] args) {
-        PrinterUtils.print(new LongestArithmeticProgressionWithGivenDifference()
-                .longestArithmeticProgression(new int[] {1,2,3,4,5,6,7,8}, 2));
-    }
+   public static void main(String[] args) {
 
-    public int longestArithmeticProgression(int[] nums, int diff) {
-        // At each number, what is the previous max progression which is present
-        Map<Integer, Integer> dp = new HashMap<>();
-        int res = 1;
-        for (int n : nums) {
-            dp.put(n, dp.getOrDefault(n - diff, 0) + 1);
-            res = Math.max(res, dp.get(n));
-        }
-        return res;
-    }
+      PrinterUtils.print(new LongestArithmeticProgressionWithGivenDifference()
+            .longestArithmeticProgression(new int[] { 1, 2, 3, 4, 5, 6, 7, 8 }, 2));
+   }
+
+   public int longestArithmeticProgression(int[] nums, int diff) {
+      // At each number, what is the previous max progression which is present
+      Map<Integer, Integer> dp = new HashMap<>();
+      int res = 1;
+      for (int n : nums) {
+         dp.put(n, dp.getOrDefault(n - diff, 0) + 1);
+         res = Math.max(res, dp.get(n));
+      }
+      return res;
+   }
 
 }

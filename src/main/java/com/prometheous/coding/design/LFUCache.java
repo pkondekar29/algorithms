@@ -3,151 +3,158 @@ package com.prometheous.coding.design;
 import java.util.HashMap;
 
 /**
- *
- *  LFU Cache.
- *
+ * LFU Cache.
  */
 public class LFUCache {
 
-    int cacheBound;
+   int cacheBound;
 
-    class CountNode {
-        int count;
-        CountNode prev, next;
-        Node nodeStart, nodeEnd;
+   class CountNode {
+      int count;
+      CountNode prev, next;
+      Node nodeStart, nodeEnd;
 
-        CountNode(int count) {
-            this.count = count;
-            this.nodeEnd = new Node(-1,-1);
-            this.nodeStart = new Node(-1, -1);
-            this.nodeStart.next = this.nodeEnd;
-            this.nodeEnd.prev = this.nodeStart;
-        }
-    }
+      CountNode(int count) {
 
-    class Node {
-        Node prev, next;
-        CountNode countNode;
-        int key, val;
+         this.count = count;
+         this.nodeEnd = new Node(-1, -1);
+         this.nodeStart = new Node(-1, -1);
+         this.nodeStart.next = this.nodeEnd;
+         this.nodeEnd.prev = this.nodeStart;
+      }
+   }
 
-        Node(int key, int val) {
-            this.key = key;
-            this.val = val;
-        }
-    }
+   class Node {
+      Node prev, next;
+      CountNode countNode;
+      int key, val;
 
-    HashMap<Integer, Node> lookup;
-    CountNode refStart, refEnd;
+      Node(int key, int val) {
 
-    public LFUCache(int bound) {
-        this.cacheBound = bound;
-        lookup = new HashMap<>();
-        refStart = new CountNode(-1);
-        refEnd = new CountNode(-1);
-        refStart.next = refEnd;
-        refEnd.prev = refStart;
-    }
+         this.key = key;
+         this.val = val;
+      }
+   }
 
-    public int get(int key) {
-        if(lookup.containsKey(key)) {
-            Node node = lookup.get(key);
+   HashMap<Integer, Node> lookup;
+   CountNode refStart, refEnd;
 
-            // Move this node to next count Node
-            updateCountNode(node);
-            return node.val;
-        } else  // Cache miss
-            return -1;
-    }
+   public LFUCache(int bound) {
 
-    public void put(int key, int value) {
-        if(this.cacheBound == 0) return;
-        // If already present, update and move to next count Node
-        Node node;
-        if(lookup.containsKey(key)) {
-            node = lookup.get(key);
-            node.val = value;
-            updateCountNode(node);
-        } else {
-            // Evict if bound overflow
-            if(this.lookup.size() == this.cacheBound) {
-                CountNode leastFrequentCountNode = refStart.next;
+      this.cacheBound = bound;
+      lookup = new HashMap<>();
+      refStart = new CountNode(-1);
+      refEnd = new CountNode(-1);
+      refStart.next = refEnd;
+      refEnd.prev = refStart;
+   }
 
-                Node toEvict = leastFrequentCountNode.nodeEnd.prev;
-                toEvict.prev.next = toEvict.next;
-                toEvict.next.prev = toEvict.prev;
+   public int get(int key) {
 
-                toEvict.next = null;
-                toEvict.prev = null;
-                lookup.remove(toEvict.key);
+      if (lookup.containsKey(key)) {
+         Node node = lookup.get(key);
 
-                // If number of node with least freq is 0, remove
-                if(leastFrequentCountNode.nodeStart.next == leastFrequentCountNode.nodeEnd) {
-                    deleteCountNode(leastFrequentCountNode);
-                }
+         // Move this node to next count Node
+         updateCountNode(node);
+         return node.val;
+      } else  // Cache miss
+         return -1;
+   }
+
+   public void put(int key, int value) {
+
+      if (this.cacheBound == 0)
+         return;
+      // If already present, update and move to next count Node
+      Node node;
+      if (lookup.containsKey(key)) {
+         node = lookup.get(key);
+         node.val = value;
+         updateCountNode(node);
+      } else {
+         // Evict if bound overflow
+         if (this.lookup.size() == this.cacheBound) {
+            CountNode leastFrequentCountNode = refStart.next;
+
+            Node toEvict = leastFrequentCountNode.nodeEnd.prev;
+            toEvict.prev.next = toEvict.next;
+            toEvict.next.prev = toEvict.prev;
+
+            toEvict.next = null;
+            toEvict.prev = null;
+            lookup.remove(toEvict.key);
+
+            // If number of node with least freq is 0, remove
+            if (leastFrequentCountNode.nodeStart.next == leastFrequentCountNode.nodeEnd) {
+               deleteCountNode(leastFrequentCountNode);
             }
+         }
 
-            // Create new Node
-            node = new Node(key, value);
-            if(refStart.next.count != 0) {
-                addCountNodeAtStart(new CountNode(0));
-            }
-            CountNode countNode = refStart.next;
+         // Create new Node
+         node = new Node(key, value);
+         if (refStart.next.count != 0) {
+            addCountNodeAtStart(new CountNode(0));
+         }
+         CountNode countNode = refStart.next;
 
-            node.next = countNode.nodeStart.next;
-            node.prev = countNode.nodeStart;
-            node.next.prev = node;
-            countNode.nodeStart.next = node;
+         node.next = countNode.nodeStart.next;
+         node.prev = countNode.nodeStart;
+         node.next.prev = node;
+         countNode.nodeStart.next = node;
 
-            node.countNode = countNode;
-        }
-        // Add to cache
-        lookup.put(key, node);
-    }
+         node.countNode = countNode;
+      }
+      // Add to cache
+      lookup.put(key, node);
+   }
 
-    private void updateCountNode(Node node) {
-        CountNode countNode = node.countNode;
-        // Remove from this countNode
-        node.prev.next = node.next;
-        node.next.prev = node.prev;
+   private void updateCountNode(Node node) {
 
-        // Add to next count Node
-        CountNode nextCountNode;
-        if(countNode.count != countNode.next.count - 1) {
-            nextCountNode = new CountNode(countNode.count + 1);
-            nextCountNode.next = countNode.next;
-            nextCountNode.prev = countNode;
-            countNode.next.prev = nextCountNode;
-            countNode.next = nextCountNode;
-        } else {
-            nextCountNode = countNode.next;
-        }
+      CountNode countNode = node.countNode;
+      // Remove from this countNode
+      node.prev.next = node.next;
+      node.next.prev = node.prev;
 
-        node.next = nextCountNode.nodeStart.next;
-        node.prev = nextCountNode.nodeStart;
-        node.next.prev = node;
-        nextCountNode.nodeStart.next = node;
+      // Add to next count Node
+      CountNode nextCountNode;
+      if (countNode.count != countNode.next.count - 1) {
+         nextCountNode = new CountNode(countNode.count + 1);
+         nextCountNode.next = countNode.next;
+         nextCountNode.prev = countNode;
+         countNode.next.prev = nextCountNode;
+         countNode.next = nextCountNode;
+      } else {
+         nextCountNode = countNode.next;
+      }
 
-        node.countNode = nextCountNode;
+      node.next = nextCountNode.nodeStart.next;
+      node.prev = nextCountNode.nodeStart;
+      node.next.prev = node;
+      nextCountNode.nodeStart.next = node;
 
-        // If freq of current count Node is 0, remove
-        if(countNode.nodeStart.next == countNode.nodeEnd) {
-            deleteCountNode(countNode);
-        }
-    }
+      node.countNode = nextCountNode;
 
-    private void deleteCountNode(CountNode countNode) {
-        countNode.prev.next = countNode.next;
-        countNode.next.prev = countNode.prev;
+      // If freq of current count Node is 0, remove
+      if (countNode.nodeStart.next == countNode.nodeEnd) {
+         deleteCountNode(countNode);
+      }
+   }
 
-        countNode.next = null;
-        countNode.prev = null;
-    }
+   private void deleteCountNode(CountNode countNode) {
 
-    private void addCountNodeAtStart(CountNode countNode) {
-        countNode.next = refStart.next;
-        refStart.next.prev = countNode;
-        countNode.prev = refStart;
-        refStart.next = countNode;
-    }
+      countNode.prev.next = countNode.next;
+      countNode.next.prev = countNode.prev;
+
+      countNode.next = null;
+      countNode.prev = null;
+   }
+
+   private void addCountNodeAtStart(CountNode countNode) {
+
+      countNode.next = refStart.next;
+      refStart.next.prev = countNode;
+      countNode.prev = refStart;
+      refStart.next = countNode;
+   }
 
 }

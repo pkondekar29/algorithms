@@ -9,25 +9,26 @@ import java.util.Queue;
 
 public class BFS {
 
-    public void bfs(List<List<Integer>> adjList) {
-        Queue<Integer> queue = new ArrayDeque<>();
-        boolean[] vis = new boolean[adjList.size()];
-        queue.offer(0);
-        vis[0] = true;
+   public void bfs(List<List<Integer>> adjList) {
 
-        List<Integer> ordering = new ArrayList<>();
-        while(!queue.isEmpty()) {
-            int at = queue.poll();
-            vis[at] = true;
-            ordering.add(at);
+      Queue<Integer> queue = new ArrayDeque<>();
+      boolean[] vis = new boolean[adjList.size()];
+      queue.offer(0);
+      vis[0] = true;
 
-            for(Integer to : adjList.get(at)) {
-                if(!vis[to]) {
-                    queue.offer(to);
-                }
+      List<Integer> ordering = new ArrayList<>();
+      while (!queue.isEmpty()) {
+         int at = queue.poll();
+         vis[at] = true;
+         ordering.add(at);
+
+         for (Integer to : adjList.get(at)) {
+            if (!vis[to]) {
+               queue.offer(to);
             }
-        }
-        PrinterUtils.printList(ordering);
-    }
+         }
+      }
+      PrinterUtils.printList(ordering);
+   }
 
 }

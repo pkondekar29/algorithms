@@ -6,108 +6,102 @@ import java.util.HashMap;
 
 public class AllSubPathsSumCount {
 
-    private static int count = 0;
+   private static int count = 0;
 
-    public static void main(String[] args) {
-        TreeNode root =
-            new TreeNode(10,
-                new TreeNode(5,
-                        new TreeNode(3,
-                                new TreeNode(3),
-                                new TreeNode(-2)),
-                        new TreeNode(2,
-                                null,
-                                new TreeNode(1))),
-                new TreeNode(-3,
-                        null,
-                        new TreeNode(11)));
-        int targetSum = 8;
-        System.out.println(totalPathSum(root, targetSum));
-        System.out.println(findCountOfAllPaths(root, targetSum));
-        System.out.println(findCountOfAllPathsEff(root, targetSum));
-    }
+   public static void main(String[] args) {
 
-    /**
-     *
-     *
-     * @param root
-     * @param targetSum
-     * @return
-     */
-    private static int findCountOfAllPathsEff(TreeNode root, int targetSum) {
-        HashMap<Integer, Integer> prefixSumMap = new HashMap<>();
-        int currSum = 0;
-        return traverse(root, targetSum, currSum, prefixSumMap);
-    }
+      TreeNode root = new TreeNode(10,
+            new TreeNode(5, new TreeNode(3, new TreeNode(3), new TreeNode(-2)), new TreeNode(2, null, new TreeNode(1))),
+            new TreeNode(-3, null, new TreeNode(11)));
+      int targetSum = 8;
+      System.out.println(totalPathSum(root, targetSum));
+      System.out.println(findCountOfAllPaths(root, targetSum));
+      System.out.println(findCountOfAllPathsEff(root, targetSum));
+   }
 
-    private static int traverse(TreeNode root, int targetSum, int currSum, HashMap<Integer, Integer> prefixSumMap) {
-        if(root == null) return 0;
+   /**
+    * @param root
+    * @param targetSum
+    * @return
+    */
+   private static int findCountOfAllPathsEff(TreeNode root, int targetSum) {
 
-        currSum += root.val;
-        int count = prefixSumMap.getOrDefault(currSum - targetSum, 0);
-        prefixSumMap.put(currSum, prefixSumMap.getOrDefault(currSum, 0) + 1);
+      HashMap<Integer, Integer> prefixSumMap = new HashMap<>();
+      int currSum = 0;
+      return traverse(root, targetSum, currSum, prefixSumMap);
+   }
 
-        count += traverse(root.left, targetSum, currSum, prefixSumMap) +
-                traverse(root.right, targetSum, currSum, prefixSumMap);
+   private static int traverse(TreeNode root, int targetSum, int currSum, HashMap<Integer, Integer> prefixSumMap) {
 
-        prefixSumMap.put(currSum, prefixSumMap.get(currSum) - 1);
-        return count;
-    }
+      if (root == null)
+         return 0;
 
-    /**
-     *
-     *
-     * @param root
-     * @param targetSum
-     * @return
-     */
-    public static int findCountOfAllPaths(TreeNode root, int targetSum) {
-        if(root == null) return 0;
+      currSum += root.val;
+      int count = prefixSumMap.getOrDefault(currSum - targetSum, 0);
+      prefixSumMap.put(currSum, prefixSumMap.getOrDefault(currSum, 0) + 1);
 
-        return findCountOfAllPaths(root.left, targetSum) + findCountOfAllPaths(root.right, targetSum) +
-                findCountOfAllPathsFrom(root, targetSum);
-    }
+      count += traverse(root.left, targetSum, currSum, prefixSumMap) + traverse(root.right, targetSum, currSum,
+            prefixSumMap);
 
-    private static int findCountOfAllPathsFrom(TreeNode root, int targetSum) {
-        if(root == null) return 0;
+      prefixSumMap.put(currSum, prefixSumMap.get(currSum) - 1);
+      return count;
+   }
 
-        return (root.val == targetSum ? 1 : 0) +
-                findCountOfAllPathsFrom(root.left, targetSum - root.val) +
-                findCountOfAllPathsFrom(root.right, targetSum - root.val);
-    }
+   /**
+    * @param root
+    * @param targetSum
+    * @return
+    */
+   public static int findCountOfAllPaths(TreeNode root, int targetSum) {
 
-    /**
-     *
-     *
-     *
-     *
-     * @param root
-     * @param targetSum
-     * @return
-     */
-    public static int totalPathSum(TreeNode root, int targetSum) {
-        traverse(root, targetSum);
-        return count;
-    }
+      if (root == null)
+         return 0;
 
-    private static void traverse(TreeNode root, int targetSum) {
-        if(root == null) return;
+      return findCountOfAllPaths(root.left, targetSum) + findCountOfAllPaths(root.right, targetSum)
+            + findCountOfAllPathsFrom(root, targetSum);
+   }
 
-        traverse(root.left, targetSum);
-        traverse(root.right, targetSum);
+   private static int findCountOfAllPathsFrom(TreeNode root, int targetSum) {
 
-        checkTargetSum(root, targetSum);
-    }
+      if (root == null)
+         return 0;
 
-    private static void checkTargetSum(TreeNode root, int targetSum) {
-        if(targetSum - root.val == 0) {
-            count++;
-        }
+      return (root.val == targetSum ? 1 : 0) + findCountOfAllPathsFrom(root.left, targetSum - root.val)
+            + findCountOfAllPathsFrom(root.right, targetSum - root.val);
+   }
 
-        if(root.left != null)
-            checkTargetSum(root.left, targetSum - root.val);
-        if(root.right != null)
-            checkTargetSum(root.right, targetSum - root.val);
-    }
+   /**
+    * @param root
+    * @param targetSum
+    * @return
+    */
+   public static int totalPathSum(TreeNode root, int targetSum) {
+
+      traverse(root, targetSum);
+      return count;
+   }
+
+   private static void traverse(TreeNode root, int targetSum) {
+
+      if (root == null)
+         return;
+
+      traverse(root.left, targetSum);
+      traverse(root.right, targetSum);
+
+      checkTargetSum(root, targetSum);
+   }
+
+   private static void checkTargetSum(TreeNode root, int targetSum) {
+
+      if (targetSum - root.val == 0) {
+         count++;
+      }
+
+      if (root.left != null)
+         checkTargetSum(root.left, targetSum - root.val);
+      if (root.right != null)
+         checkTargetSum(root.right, targetSum - root.val);
+   }
 
 }

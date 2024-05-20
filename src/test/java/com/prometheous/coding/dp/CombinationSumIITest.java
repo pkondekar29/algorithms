@@ -9,19 +9,21 @@ import java.util.stream.Stream;
 
 public class CombinationSumIITest {
 
-    public static Stream<Arguments> all() {
-        return Stream.of(Arguments.of(new int[]{1, 2}, 4));
-    }
+   public static Stream<Arguments> all() {
 
-    @ParameterizedTest
-    @MethodSource(value = "all")
-    public void test(int[] a, int t) {
-        CombinationSumII.combinationSum2(a, t);
-        List<List<Integer>> res = CombinationSumII.ret;
-        for (List<Integer> l : res) {
-            l.forEach(e -> System.out.print(e + " "));
-            System.out.println();
-        }
-    }
+      return Stream.of(Arguments.of(new int[] { 1, 2 }, 4));
+   }
+
+   @ParameterizedTest
+   @MethodSource(value = "all")
+   public void test(int[] a, int t) {
+
+      CombinationSumII.combinationSum2(a, t);
+      List<List<Integer>> res = CombinationSumII.ret;
+      for (List<Integer> l : res) {
+         l.forEach(e -> System.out.print(e + " "));
+         System.out.println();
+      }
+   }
 
 }

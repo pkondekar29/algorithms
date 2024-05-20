@@ -4,43 +4,49 @@ import com.prometheous.coding.model.ListNode;
 
 public class SortList {
 
-    // TODO
-    // T = O(nlogn), S = O(logN)
-    public ListNode sort(ListNode head) {
-        if(head == null || head.next == null) return head;
+   // TODO
+   // T = O(nlogn), S = O(logN)
+   public ListNode sort(ListNode head) {
 
-        ListNode middle = getMiddle(head);
-        ListNode next = middle.next;
+      if (head == null || head.next == null)
+         return head;
 
-        middle.next = null;
-        ListNode left = sort(head);
-        ListNode right = sort(next);
+      ListNode middle = getMiddle(head);
+      ListNode next = middle.next;
 
-        return merge(left, right);
-    }
+      middle.next = null;
+      ListNode left = sort(head);
+      ListNode right = sort(next);
 
-    private ListNode merge(ListNode a, ListNode b) {
-        ListNode result;
-        if(a == null) return b;
-        else if (b == null) return a;
+      return merge(left, right);
+   }
 
-        if(a.val <= b.val) {
-            result = a;
-            result.next = merge(a.next, b);
-        } else {
-            result = b;
-            result.next = merge(a, b.next);
-        }
-        return result;
-    }
+   private ListNode merge(ListNode a, ListNode b) {
 
-    private ListNode getMiddle(ListNode head) {
-        ListNode slow = head, fast = head;
-        while(fast != null && fast.next.next != null) {
-            fast = fast.next.next;
-            slow = slow.next;
-        }
-        return slow;
-    }
+      ListNode result;
+      if (a == null)
+         return b;
+      else if (b == null)
+         return a;
+
+      if (a.val <= b.val) {
+         result = a;
+         result.next = merge(a.next, b);
+      } else {
+         result = b;
+         result.next = merge(a, b.next);
+      }
+      return result;
+   }
+
+   private ListNode getMiddle(ListNode head) {
+
+      ListNode slow = head, fast = head;
+      while (fast != null && fast.next.next != null) {
+         fast = fast.next.next;
+         slow = slow.next;
+      }
+      return slow;
+   }
 
 }
