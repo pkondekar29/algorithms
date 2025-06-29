@@ -1,81 +1,87 @@
 package com.prometheous.coding.design;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class LRUCache {
 
    class Node {
-      int key;
-      int value;
-      Node prev;
-      Node next;
-
-      Node() {
-
+      public int key;
+      public int value;
+      public Node prev;
+      public Node next;
+      public Node(int key, int value) {
+         this.key = key;
+         this.value = value;
       }
    }
 
-   final Node first = new Node(), last = new Node();
-   final HashMap<Integer, Node> cache;
-   final int capacity;
+   Map<Integer, Node> map;
+   Node first, last;
+   int size;
 
    public LRUCache(int capacity) {
-
-      cache = new HashMap<>(capacity);
-      this.capacity = capacity;
+      first = new Node(-1, -1);
+      last = new Node(-1, -1);
       first.next = last;
       last.prev = first;
+      map = new HashMap<>();
+      this.size = capacity;
    }
 
    public int get(int key) {
-
-      if (cache.size() == 0 || !cache.containsKey(key))
-         return -1;
-
-      Node node = cache.get(key);
-      remove(node);
-      addFront(node);
-
-      return node.value;
+      // Get the value from map
+      int res = -1;
+      if(map.containsKey(key)) {
+         Node node = map.get(key);
+         // Update the recency of node in LL
+         removeNode(node);
+         addFront(node);
+      }
+      return res;
    }
 
    public void put(int key, int value) {
-
-      Node node;
-      if (cache.containsKey(key)) {
-         node = cache.get(key);
-         remove(node);       // Remove node from LL
-         node.value = value; // Update the node
-      } else {
-         if (cache.size() == capacity) {
-            cache.remove(last.prev.key);    // Remove the last node from cache
-            remove(last.prev);              // Remove last node from LL
-         }
-         node = new Node();
-         node.key = key;
+      // Put the value in map
+      Node node = null;
+      if(map.containsKey(key)) {
+         node = map.get(key);
          node.value = value;
-
-         cache.put(key, node);
+      } else {
+         node = new Node(key, value);
+         map.put(key, node);
       }
-      addFront(node);     // Finally add in front
+      removeNode(node);
+      addFront(node);
+
+      if(map.size() > size) {
+         Node leastRecentlyUsed = last.prev;
+         if(leastRecentlyUsed != null) {
+            removeNode(leastRecentlyUsed);
+            map.remove(leastRecentlyUsed.key);
+         }
+      }
+   }
+
+   private void removeNode(Node node) {
+      if(node.prev != null) {
+         node.prev.next = node.next;
+      }
+      if(node.next != null) {
+         node.next.prev = node.prev;
+      }
+      node.next = null;
+      node.prev = null;
    }
 
    private void addFront(Node node) {
-
-      Node firstNode = first.next;
+      Node next = first.next;
       first.next = node;
+      node.next = next;
       node.prev = first;
-      node.next = firstNode;
-      firstNode.prev = node;
-   }
-
-   private void remove(Node node) {
-
-      Node nextNode = node.next;
-      Node prevNode = node.prev;
-
-      nextNode.prev = prevNode;
-      prevNode.next = nextNode;
+      if(next != null) {
+         next.prev = node;
+      }
    }
 
 }

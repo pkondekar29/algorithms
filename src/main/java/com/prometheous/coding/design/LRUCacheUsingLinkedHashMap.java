@@ -11,9 +11,8 @@ public class LRUCacheUsingLinkedHashMap {
    public LRUCacheUsingLinkedHashMap(int capacity) {
 
       this.CAPACITY = capacity;
-      cache = new LinkedHashMap<Integer, Integer>(capacity, 0.75f, true) {
+      cache = new LinkedHashMap<>(capacity, 0.75f, true) {
          protected boolean removeEldestEntry(Map.Entry eldest) {
-
             return size() > CAPACITY;
          }
       };

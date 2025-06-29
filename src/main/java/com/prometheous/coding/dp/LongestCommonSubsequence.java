@@ -1,4 +1,4 @@
-package com.prometheous.coding.string;
+package com.prometheous.coding.dp;
 
 public class LongestCommonSubsequence {
 

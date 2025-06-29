@@ -39,6 +39,16 @@ public class JumpGame {
       return false;
    }
 
+   public boolean canJumpGreedy(int[] nums) {
+      int goal = nums.length - 1;
+      for (int i = nums.length - 2; i >= 0; i--) {
+         if (i + nums[i] >= goal) {
+            goal = i;
+         }
+      }
+      return goal == 0;
+   }
+
    public static boolean canJumpRec(int[] nums) {
 
       boolean[] canJump = new boolean[nums.length];

@@ -2,19 +2,52 @@ package com.prometheous.coding.array;
 
 import com.prometheous.coding.utils.PrinterUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class GroupAnagrams {
 
+   static class Hist {
+      String str;
+      int[] hist;
+
+      Hist(String str) {
+         this.str = str;
+         this.hist = new int[26];
+         for(int i = 0; i < str.length(); i++) {
+            hist[str.charAt(i) - 'a']++;
+         }
+      }
+
+      @Override
+      public int hashCode() {
+         return Objects.hashCode(hist);
+      }
+
+      @Override
+      public boolean equals(Object obj) {
+         return Arrays.equals(hist, ((Hist)obj).hist);
+      }
+   }
+
+   public static List<List<String>> groupAnagrams(String[] strs) {
+      Map<Hist, List<String>> map = new HashMap<>();
+      for(int i = 0; i < strs.length; i++) {
+         Hist hist = new Hist(strs[i]);
+         map.putIfAbsent(hist, new ArrayList<>());
+         map.get(hist).add(hist.str);
+      }
+      return new ArrayList<>(map.values());
+   }
+
    public static void main(String[] args) {
 
       String[] strs = new String[] { "eat", "tea", "tan", "ate", "nat", "bat" };
-      groupAnagramsEff(strs).stream().map(list -> list.stream().collect(Collectors.joining(",")))
-            .forEach(System.out::println);
+//      groupAnagramsEff(strs).stream().map(list -> list.stream().collect(Collectors.joining(",")))
+//            .forEach(System.out::println);
+
+      groupAnagrams(strs).stream().map(list -> list.stream().collect(Collectors.joining(",")))
+              .forEach(System.out::println);
    }
 
    public static List<List<String>> groupAnagramsEff(String[] strs) {

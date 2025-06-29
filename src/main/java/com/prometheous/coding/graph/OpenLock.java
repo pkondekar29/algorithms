@@ -67,7 +67,7 @@ public class OpenLock {
 
    public int openLock(String[] deadends, String target) {
 
-      HashSet<String> deadEnds = Arrays.stream(deadends).collect(Collectors.toCollection(() -> new HashSet<String>()));
+      HashSet<String> deadEnds = Arrays.stream(deadends).collect(Collectors.toCollection(HashSet::new));
       String s = "0000";
       int n = 4;
 
