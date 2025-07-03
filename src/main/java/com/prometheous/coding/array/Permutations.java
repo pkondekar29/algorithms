@@ -4,8 +4,6 @@ import com.prometheous.coding.utils.PrinterUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Permutations {
 
@@ -20,11 +18,11 @@ public class Permutations {
       List<List<Integer>> res = new ArrayList<>();
       List<Integer> currList = new ArrayList<>();
       boolean[] vis = new boolean[nums.length];
-      dfs(nums, vis, currList, res, 0);
+      dfs(nums, vis, currList, res);
       return res;
    }
 
-   private static void dfs(int[] nums, boolean[] vis, List<Integer> currList, List<List<Integer>> res, int k) {
+   private static void dfs(int[] nums, boolean[] vis, List<Integer> currList, List<List<Integer>> res) {
 
       if (currList.size() == nums.length) {
          res.add(new ArrayList<>(currList));
@@ -34,7 +32,7 @@ public class Permutations {
          if (!vis[i]) {
             currList.add(nums[i]);
             vis[i] = true;
-            dfs(nums, vis, currList, res, i);
+            dfs(nums, vis, currList, res);
             currList.remove(currList.size() - 1);
             vis[i] = false;
          }

@@ -1,6 +1,7 @@
 package com.prometheous.coding.design;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class AuthenticationManager {
 
@@ -9,7 +10,7 @@ public class AuthenticationManager {
 
     public AuthenticationManager(int timeToLive) {
         ttl = timeToLive;
-        tokenMap = new HashMap<>();
+        tokenMap = new ConcurrentHashMap<>();
     }
 
     public void generate(String tokenId, int currentTime) {

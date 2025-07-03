@@ -33,8 +33,6 @@ public class BurstBaloon {
                 if(k != i) after.add(nums.get(k));
             }
 
-            System.out.println(bursted);
-            System.out.println(after);
             int afterMax = burst(after, memo);
             res = Math.max(res, bursted + afterMax);
             memo.put(after, afterMax);
