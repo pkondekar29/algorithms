@@ -1,7 +1,9 @@
 package com.prometheous.coding.model;
 
 import lombok.Data;
+import lombok.Getter;
 
+@Getter
 @Data
 public class ListNode {
    public int val;

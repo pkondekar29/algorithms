@@ -23,7 +23,7 @@ public class MergeKSortedList {
 
       if (list.length == 0)
          return null;
-      PriorityQueue<ListNode> q = new PriorityQueue<>(Comparator.comparingInt(ListNode::getVal));
+      PriorityQueue<ListNode> q = new PriorityQueue<>();
       ListNode prev = null, head = null;
       for (ListNode node : list) {
          q.add(node);
