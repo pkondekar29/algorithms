@@ -80,4 +80,21 @@ public class HouseRobber {
       return memo[k];
    }
 
+   public int robIIEff(int[] nums) {
+      int n = nums.length;
+      if(n == 1) return nums[0];
+
+      return Math.max(getMax(nums, 0, n - 2), getMax(nums, 1, n - 1));
+   }
+
+   private int getMax(int[] nums, int low, int high) {
+      int prev = 0, max = 0;
+      for(int i = low; i <= high; i++) {
+         int temp = Math.max(max, prev + nums[i]);
+         prev = max;
+         max = temp;
+      }
+      return max;
+   }
+
 }
