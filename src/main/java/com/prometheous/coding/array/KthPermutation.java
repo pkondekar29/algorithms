@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class KthPermutation {
 
+   public static void main(String[] args) {
+      System.out.println(KthPermutation.findKthPermutation(3, 3));
+   }
+
    private static String findKthPermutation(int n, int k) {
 
       StringBuilder sb = new StringBuilder();

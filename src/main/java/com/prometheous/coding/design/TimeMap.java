@@ -1,19 +1,18 @@
 package com.prometheous.coding.design;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentNavigableMap;
-import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.TreeMap;
 
 public class TimeMap {
-    private Map<String, ConcurrentNavigableMap<Integer, String>> map;
+    private Map<String, TreeMap<Integer, String>> map;
 
     public TimeMap() {
-        map = new ConcurrentHashMap<>();
+        map = new HashMap<>();
     }
 
     public void set(String key, String value, int timestamp) {
-        map.putIfAbsent(key, new ConcurrentSkipListMap<>());
+        map.putIfAbsent(key, new TreeMap<>());
         map.get(key).put(timestamp, value);
     }
 
@@ -21,7 +20,7 @@ public class TimeMap {
         if(!map.containsKey(key)) {
             return "";
         }
-        ConcurrentNavigableMap<Integer, String> timeValueMap = map.get(key);
+        TreeMap<Integer, String> timeValueMap = map.get(key);
         Map.Entry<Integer, String> timestampPrev = timeValueMap.floorEntry(timestamp);
         return timestampPrev == null ? "" : timeValueMap.firstEntry().getValue();
     }

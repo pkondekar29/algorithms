@@ -14,7 +14,7 @@ public class AllCombinations {
    public static void main(String[] args) {
 
       int n = 4, k = 2;
-      AllCombinations.combinations(n, k).stream()
+      AllCombinations.find(n, k).stream()
             .map(intList -> intList.stream().map(Object::toString).collect(Collectors.joining(",")))
             .forEach(System.out::println);
    }

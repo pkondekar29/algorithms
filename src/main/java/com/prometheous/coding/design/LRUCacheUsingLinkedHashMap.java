@@ -12,9 +12,12 @@ public class LRUCacheUsingLinkedHashMap {
 
       this.CAPACITY = capacity;
       cache = new LinkedHashMap<>(capacity, 0.75f, true) {
-         protected boolean removeEldestEntry(Map.Entry eldest) {
+
+         @Override
+         protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
             return size() > CAPACITY;
          }
+
       };
    }
 

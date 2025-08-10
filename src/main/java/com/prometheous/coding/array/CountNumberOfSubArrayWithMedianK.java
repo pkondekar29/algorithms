@@ -19,7 +19,8 @@ public class CountNumberOfSubArrayWithMedianK {
                 found = true;
             }
             if(found) {
-                res += prefixSum.getOrDefault(windowSum, 0) + prefixSum.getOrDefault(windowSum - 1, 0);
+                res += prefixSum.getOrDefault(windowSum, 0)
+                        + prefixSum.getOrDefault(windowSum - 1, 0);
             } else {
                 prefixSum.put(windowSum, prefixSum.getOrDefault(windowSum, 0) + 1);
             }

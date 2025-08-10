@@ -6,8 +6,8 @@ public class FindRangeInSortedArr {
 
    public static void main(String[] args) {
 
-      int[] nums = new int[] { 1 };
-      PrinterUtils.print(findRange(nums, 1));
+      int[] nums = new int[] { 1,1,2,4,5 };
+      PrinterUtils.print(findRange(nums, 3));
    }
 
    public static int[] findRange(int[] nums, int target) {
