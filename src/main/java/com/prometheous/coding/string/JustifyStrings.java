@@ -7,20 +7,42 @@ import java.util.Scanner;
 public class JustifyStrings {
 
    public static void main(String[] args) {
+      justifyEff(new String[] {"What","must","be","acknowle","shall","be"}, 16).forEach(System.out::println);
+   }
 
-      Scanner sc = new Scanner(System.in);
+   public static List<String> justifyEff(String[] words, int maxWidth) {
+      List<String> res = new ArrayList<>();
+      List<String> cur = new ArrayList<>();
+      int numOfLetters = 0;
 
-      int n = sc.nextInt();
-      String[] input = new String[n];
-      for (int i = 0; i < n; i++)
-         input[i] = sc.next();
+      for (String word : words) {
+         if (word.length() + cur.size() + numOfLetters > maxWidth) {
+            for (int i = 0; i < maxWidth - numOfLetters; i++) {
+               cur.set(i % (cur.size() - 1 > 0 ? cur.size() - 1 : 1),
+                       cur.get(i % (cur.size() - 1 > 0 ? cur.size() - 1 : 1)) + " ");
+            }
+            StringBuilder sb = new StringBuilder();
+            for (String s : cur) sb.append(s);
+            res.add(sb.toString());
+            cur.clear();
+            numOfLetters = 0;
+         }
+         cur.add(word);
+         numOfLetters += word.length();
+      }
 
-      int max = sc.nextInt();
-      justify(input, max).forEach(System.out::println);
+      StringBuilder lastLine = new StringBuilder();
+      for (int i = 0; i < cur.size(); i++) {
+         lastLine.append(cur.get(i));
+         if (i != cur.size() - 1) lastLine.append(" ");
+      }
+      while (lastLine.length() < maxWidth) lastLine.append(" ");
+      res.add(lastLine.toString());
+
+      return res;
    }
 
    public static List<String> justify(String[] words, int maxWidth) {
-
       List<String> justified = new ArrayList<>();
 
       int i = 0;

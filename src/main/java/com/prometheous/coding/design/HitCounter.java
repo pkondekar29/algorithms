@@ -13,11 +13,11 @@ public class HitCounter {
     }
 
     public void hit(int timestamp) {
-        int idx = timestamp % FIVE_MINS;
+        int idx = timestamp % FIVE_MINS;            // modulo for 5 mins
 
-        if(timestamps[idx] != timestamp) {
-            timestamps[idx] = timestamp;
-            hits[idx] = 1;
+        if(timestamps[idx] != timestamp) {  // keep the current timestamp from last 5 minutes to keep track of modulo
+            timestamps[idx] = timestamp;        // If not, then we have passed 5 mins and update it
+            hits[idx] = 1;      // reset counter
         } else {
             hits[idx]++;
         }

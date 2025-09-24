@@ -8,8 +8,8 @@ import java.util.List;
 public class CombinationSum {
 
    public static void main(String[] args) {
-      //        int[] c = {2, 3, 6, 7};
-      int[] c = { 1, 2 };
+              int[] c = {2, 3, 6, 7};
+//      int[] c = { 1, 2 };
       combinationSumEff(c, 3).stream().forEach(l -> {
          l.forEach(i -> System.out.print(i + " "));
          System.out.println();

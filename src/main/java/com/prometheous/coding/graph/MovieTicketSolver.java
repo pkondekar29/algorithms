@@ -49,8 +49,8 @@ public class MovieTicketSolver {
         for (int i = 0; i < m; i++) {
             int u = tickets[i][0];
             int v = tickets[i][1];
-            adj.computeIfAbsent(u, k -> new ArrayList<>()).add(new int[]{v, i});
-            adj.computeIfAbsent(v, k -> new ArrayList<>()).add(new int[]{u, i});
+            adj.computeIfAbsent(u, _ -> new ArrayList<>()).add(new int[]{v, i});
+            adj.computeIfAbsent(v, _ -> new ArrayList<>()).add(new int[]{u, i});
         }
 
         // 2. Process each connected component of the graph
